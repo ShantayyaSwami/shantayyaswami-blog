@@ -1,0 +1,40 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<form id="nl-form" class="flex gap-3 flex-col sm:flex-row">
+  <input
+    type="email"
+    required
+    placeholder="your@email.com"
+    class:list={[
+      'flex-1 bg-surface border border-white/10 rounded-xl font-mono text-sm text-ink',
+      'placeholder-muted outline-none focus:border-accent/50 transition-colors',
+      compact ? 'px-4 py-2.5' : 'px-5 py-3',
+    ]}
+  />
+  <button
+    type="submit"
+    class:list={[
+      'bg-accent hover:bg-accent/90 text-white font-mono text-sm font-medium',
+      'rounded-xl transition-colors whitespace-nowrap',
+      compact ? 'px-5 py-2.5' : 'px-6 py-3',
+    ]}
+  >
+    Subscribe
+  </button>
+</form>
+<p id="nl-msg" class="font-mono text-xs text-teal hidden mt-2">
+  You're in! Welcome aboard.
+</p>
+
+<script>
+  document.getElementById('nl-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('nl-msg')?.classList.remove('hidden');
+    (e.target as HTMLFormElement).reset();
+  });
+</script>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shantayyaswami.com/sitemap-index.xml

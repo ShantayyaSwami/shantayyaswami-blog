@@ -1,0 +1,59 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import NewsletterForm from '@/components/NewsletterForm.astro';
+
+const perks = [
+  {
+    icon: '⚡',
+    title: 'Weekly Deep Dives',
+    body: 'In-depth articles on AWS, DevOps, and AI engineering — published when they\'re ready, not on a forced schedule.',
+  },
+  {
+    icon: '🛠',
+    title: 'Practical & Hands-On',
+    body: 'Real patterns, real configurations, real architecture decisions. No fluff, no hype.',
+  },
+  {
+    icon: '🔒',
+    title: 'No Spam, Ever',
+    body: 'Your email is yours. Unsubscribe any time with a single click — no questions asked.',
+  },
+];
+---
+
+<BaseLayout
+  title="Newsletter"
+  description="Subscribe to Shantayya Swami's newsletter for weekly deep dives on AWS, DevOps, and AI engineering."
+>
+  <div class="max-w-2xl mx-auto px-6 py-24 text-center">
+    <span class="inline-block font-mono text-xs tracking-[3px] uppercase text-teal bg-teal/10 border border-teal/20 rounded-full px-4 py-2 mb-8">
+      Newsletter
+    </span>
+
+    <h1 class="font-serif text-5xl font-black text-white mb-6 leading-tight">
+      Engineering Clarity,<br />
+      <span class="text-accent italic">Weekly.</span>
+    </h1>
+
+    <p class="text-muted text-lg leading-relaxed mb-12">
+      Join engineers getting sharper on Cloud, DevOps, and AI.
+      One email. Actionable insights. Zero noise.
+    </p>
+
+    <div class="bg-card border border-white/[0.08] rounded-2xl p-8 mb-12 text-left">
+      <NewsletterForm />
+    </div>
+
+    <div class="grid gap-7 text-left">
+      {perks.map(({ icon, title, body }) => (
+        <div class="flex gap-4 items-start">
+          <span class="text-2xl flex-shrink-0 mt-0.5" aria-hidden="true">{icon}</span>
+          <div>
+            <h3 class="font-serif font-bold text-white mb-1">{title}</h3>
+            <p class="text-muted text-sm leading-relaxed">{body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

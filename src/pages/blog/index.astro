@@ -1,0 +1,53 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import BlogCard from '@/components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
+---
+
+<BaseLayout
+  title="Blog"
+  description="Articles on AWS, DevOps, AI, and infrastructure engineering by Shantayya Swami."
+>
+  <div class="max-w-5xl mx-auto px-6 py-16">
+    <header class="mb-14">
+      <h1 class="font-serif text-5xl font-black text-white mb-4">Blog</h1>
+      <p class="text-muted text-lg max-w-lg leading-relaxed">
+        Deep dives on Cloud, DevOps, AI, and everything in between.
+      </p>
+    </header>
+
+    <!-- Tag cloud -->
+    <div class="flex flex-wrap gap-2 mb-12">
+      {allTags.map(tag => (
+        <span class="font-mono text-xs text-muted border border-white/[0.08] rounded-full px-3 py-1.5
+                     hover:border-teal/30 hover:text-teal transition-colors cursor-default">
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    <!-- Posts grid -->
+    {posts.length > 0 ? (
+      <div class="grid md:grid-cols-2 gap-6">
+        {posts.map(post => (
+          <BlogCard
+            title={post.data.title}
+            excerpt={post.data.excerpt}
+            date={post.data.date}
+            tags={post.data.tags}
+            readTime={post.data.readTime}
+            slug={post.slug}
+            featured={post.data.featured}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="text-muted font-mono text-sm">No posts yet. Check back soon.</p>
+    )}
+  </div>
+</BaseLayout>

@@ -1,0 +1,79 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const skills = [
+  'AWS', 'Terraform', 'Kubernetes', 'Docker',
+  'CI/CD', 'Linux', 'Python', 'Bash',
+  'Networking', 'SRE', 'GitOps', 'Observability',
+  'DevSecOps', 'Ansible', 'Jenkins', 'EKS',
+];
+
+const connect = [
+  { href: 'https://github.com/shantayyaswami',     label: 'GitHub',   color: 'hover:border-white/30 hover:text-ink' },
+  { href: 'https://linkedin.com/in/shantayyaswami', label: 'LinkedIn', color: 'hover:border-violet/40 hover:text-violet' },
+  { href: 'mailto:shantayyaswami4@gmail.com',        label: 'Email',    color: 'hover:border-accent/40 hover:text-accent' },
+];
+---
+
+<BaseLayout
+  title="About"
+  description="Shantayya Swami — Cloud & DevOps Engineer, technical writer, and AWS practitioner."
+>
+  <div class="max-w-3xl mx-auto px-6 py-16">
+    <header class="mb-16">
+      <h1 class="font-serif text-5xl font-black text-white mb-6">About Me</h1>
+      <div class="w-16 h-1 bg-accent rounded-full"></div>
+    </header>
+
+    <div class="space-y-6 text-muted leading-loose text-lg mb-16">
+      <p>
+        I&apos;m <strong class="text-ink">Shantayya Swami</strong>, a Cloud &amp; DevOps Engineer
+        passionate about building reliable, scalable infrastructure on AWS. I write about the
+        technologies and patterns shaping modern engineering — from Kubernetes and Terraform
+        to AI agents and platform engineering.
+      </p>
+      <p>
+        With hands-on experience deploying production workloads on AWS, I focus on bridging the gap
+        between traditional ops and the AI-accelerated future of DevOps. I believe deep fundamentals
+        — networking, Linux, systems thinking — are the foundation every cloud engineer needs.
+      </p>
+      <p>
+        When I&apos;m not writing infrastructure-as-code or debugging production systems,
+        I&apos;m writing here — sharing what I learn so the community can move faster together.
+      </p>
+    </div>
+
+    <!-- Skills -->
+    <section class="mb-16">
+      <h2 class="font-serif text-2xl font-bold text-white mb-6">Skills &amp; Tools</h2>
+      <div class="flex flex-wrap gap-3">
+        {skills.map(skill => (
+          <span class="font-mono text-sm text-ink bg-card border border-white/[0.08]
+                       rounded-xl px-4 py-2 hover:border-accent/30 transition-colors">
+            {skill}
+          </span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Connect -->
+    <section>
+      <h2 class="font-serif text-2xl font-bold text-white mb-6">Connect</h2>
+      <div class="flex flex-col sm:flex-row gap-3">
+        {connect.map(({ href, label, color }) => (
+          <a
+            href={href}
+            target={href.startsWith('http') ? '_blank' : undefined}
+            rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            class:list={[
+              'bg-card border border-white/[0.08] rounded-xl px-6 py-3 font-mono text-sm text-muted transition-colors',
+              color,
+            ]}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

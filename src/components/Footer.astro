@@ -1,0 +1,31 @@
+---
+const year = new Date().getFullYear();
+
+const social = [
+  { href: 'https://github.com/shantayyaswami',    label: 'GitHub' },
+  { href: 'https://linkedin.com/in/shantayyaswami', label: 'LinkedIn' },
+  { href: '/rss.xml',                               label: 'RSS' },
+];
+---
+
+<footer class="border-t border-white/[0.08] bg-surface mt-auto">
+  <div class="max-w-5xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+    <p class="font-mono text-xs text-muted">
+      &copy; {year} Shantayya Swami &middot; Built with{' '}
+      <a href="https://astro.build" target="_blank" rel="noopener noreferrer"
+         class="text-accent hover:underline">Astro</a>
+    </p>
+    <ul class="flex items-center gap-6">
+      {social.map(({ href, label }) => (
+        <li>
+          <a
+            href={href}
+            target={href.startsWith('http') ? '_blank' : undefined}
+            rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            class="font-mono text-xs text-muted hover:text-ink transition-colors tracking-wide"
+          >{label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</footer>

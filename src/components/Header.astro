@@ -1,0 +1,61 @@
+---
+const navLinks = [
+  { href: '/',           label: 'Home' },
+  { href: '/blog',       label: 'Blog' },
+  { href: '/portfolio',  label: 'Portfolio' },
+  { href: '/about',      label: 'About' },
+  { href: '/newsletter', label: 'Newsletter' },
+];
+
+const path = Astro.url.pathname;
+---
+
+<header class="border-b border-white/[0.08] bg-bg/90 backdrop-blur-md sticky top-0 z-50">
+  <nav class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/" class="font-serif text-xl font-bold text-white hover:text-accent transition-colors">
+      Shantayya<span class="text-accent">.</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8">
+      {navLinks.map(({ href, label }) => (
+        <li>
+          <a
+            href={href}
+            class:list={[
+              'font-mono text-sm tracking-wide transition-colors',
+              (path === href || (href !== '/' && path.startsWith(href)))
+                ? 'text-accent'
+                : 'text-muted hover:text-ink',
+            ]}
+          >{label}</a>
+        </li>
+      ))}
+    </ul>
+
+    <button id="menu-btn" class="md:hidden text-muted hover:text-ink p-1 transition-colors" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div id="mobile-nav" class="hidden md:hidden border-t border-white/[0.08] bg-surface px-6 py-4">
+    <ul class="flex flex-col gap-3">
+      {navLinks.map(({ href, label }) => (
+        <li>
+          <a href={href} class="font-mono text-sm text-muted hover:text-ink block py-1 transition-colors">
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<script>
+  document.getElementById('menu-btn')?.addEventListener('click', () => {
+    document.getElementById('mobile-nav')?.classList.toggle('hidden');
+  });
+</script>

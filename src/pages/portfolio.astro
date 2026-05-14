@@ -1,0 +1,92 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    title: 'Static Website on AWS',
+    description:
+      'Terraform-provisioned S3 + CloudFront + Route53 stack for serving static sites with SSL, CDN caching, and zero-downtime deployments.',
+    tags: ['AWS', 'Terraform', 'S3', 'CloudFront', 'Route53'],
+    status: 'Live',
+    href: 'https://github.com/shantayyaswami',
+  },
+  {
+    title: 'Kubernetes DevOps Pipeline',
+    description:
+      'End-to-end CI/CD pipeline for containerised Java microservices using Jenkins, Docker, and Amazon EKS — with rolling updates and health checks.',
+    tags: ['Kubernetes', 'Docker', 'Jenkins', 'EKS', 'Java'],
+    status: 'Live',
+    href: 'https://github.com/shantayyaswami',
+  },
+  {
+    title: 'Employee Web Application',
+    description:
+      'Maven-based Java web application with full Dockerisation, automated image builds, and a CI/CD pipeline pushing to a private registry.',
+    tags: ['Docker', 'Maven', 'Java', 'CI/CD'],
+    status: 'Live',
+    href: 'https://github.com/shantayyaswami',
+  },
+  {
+    title: 'AI DevOps Agent Lab',
+    description:
+      'Experimental setup exploring Amazon Bedrock agents for automated incident response, runbook execution, and post-mortem generation.',
+    tags: ['AWS Bedrock', 'AI Agents', 'DevOps', 'Python'],
+    status: 'In Progress',
+    href: null,
+  },
+];
+---
+
+<BaseLayout
+  title="Portfolio"
+  description="Cloud and DevOps projects by Shantayya Swami — AWS, Terraform, Kubernetes, and more."
+>
+  <div class="max-w-5xl mx-auto px-6 py-16">
+    <header class="mb-14">
+      <h1 class="font-serif text-5xl font-black text-white mb-4">Portfolio</h1>
+      <p class="text-muted text-lg max-w-lg leading-relaxed">
+        Things I&apos;ve built, deployed, and learned from.
+      </p>
+    </header>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {projects.map(({ title, description, tags, status, href }) => (
+        <div class="bg-card border border-white/[0.08] rounded-2xl p-6
+                    hover:border-white/20 transition-all duration-300 flex flex-col gap-4">
+          <div class="flex items-start justify-between gap-3">
+            <h2 class="font-serif text-xl font-bold text-white leading-snug">{title}</h2>
+            <span class:list={[
+              'font-mono text-xs rounded-full px-2.5 py-0.5 flex-shrink-0 mt-0.5',
+              status === 'Live'
+                ? 'text-teal bg-teal/10 border border-teal/20'
+                : 'text-warn bg-warn/10 border border-warn/20',
+            ]}>
+              {status}
+            </span>
+          </div>
+
+          <p class="text-muted text-sm leading-relaxed flex-1">{description}</p>
+
+          <div class="flex flex-wrap gap-2">
+            {tags.map(tag => (
+              <span class="font-mono text-[11px] text-muted border border-white/[0.08] rounded-lg px-2.5 py-0.5">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {href && (
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-mono text-xs text-accent hover:underline self-start mt-1"
+            >
+              View on GitHub &rarr;
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

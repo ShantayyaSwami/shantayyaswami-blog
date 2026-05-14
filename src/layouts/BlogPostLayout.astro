@@ -1,0 +1,60 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title:       string;
+  description: string;
+  date:        Date;
+  tags:        string[];
+  readTime:    string;
+  author:      string;
+  image?:      string;
+}
+
+const { title, description, date, tags, readTime, author, image } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description} image={image} type="article" publishedDate={date}>
+  <div class="max-w-3xl mx-auto px-6 py-16">
+
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-2 mb-6">
+      {tags.map(tag => (
+        <span class="font-mono text-xs text-teal bg-teal/10 border border-teal/20 rounded-full px-3 py-1">
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    <!-- Title -->
+    <h1 class="font-serif text-4xl md:text-5xl font-black leading-[1.08] text-white mb-6">
+      {title}
+    </h1>
+
+    <!-- Meta bar -->
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-sm text-muted
+                mb-12 pb-8 border-b border-white/[0.08]">
+      <span>{author}</span>
+      <span class="hidden sm:block w-1 h-1 rounded-full bg-muted"></span>
+      <span>{formattedDate}</span>
+      <span class="hidden sm:block w-1 h-1 rounded-full bg-muted"></span>
+      <span>{readTime}</span>
+    </div>
+
+    <!-- Prose content -->
+    <article class="prose prose-blog prose-lg max-w-none">
+      <slot />
+    </article>
+
+    <!-- Back link -->
+    <div class="mt-16 pt-8 border-t border-white/[0.08]">
+      <a href="/blog" class="font-mono text-sm text-muted hover:text-accent transition-colors">
+        &larr; Back to all posts
+      </a>
+    </div>
+  </div>
+</BaseLayout>
