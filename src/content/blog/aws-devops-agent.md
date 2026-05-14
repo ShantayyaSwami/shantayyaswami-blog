@@ -1,6 +1,6 @@
 ---
 title: "Is DevOps Dead? AWS's New AI Agent Changes Everything"
-date: 2025-05-14
+date: 2026-05-14
 tags: ["AWS", "DevOps", "AI", "Cloud Engineering", "SRE"]
 excerpt: "AWS just shipped a DevOps agent that investigates incidents, fixes production bugs, and writes root-cause analysis — while you sleep. Here's what it means for your career."
 readTime: "8 min read"
