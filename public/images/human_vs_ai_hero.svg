@@ -1,0 +1,136 @@
+<svg width="100%" viewBox="0 0 690 410" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Human intuition vs AI assistance illustration</title>
+<desc>Split illustration showing a human brain with connected human traits on the left versus an AI circuit brain on the right, with a clear message that humans lead and AI assists</desc>
+
+<rect x="0" y="0" width="680" height="400" fill="#080b14"/>
+
+<rect x="0" y="0" width="338" height="400" fill="#0d1020"/>
+<rect x="342" y="0" width="338" height="400" fill="#090d1a"/>
+<rect x="336" y="0" width="8" height="400" fill="#ff6b35" opacity="0.9"/>
+
+<text x="169" y="34" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#3dd68c" letter-spacing="3">HUMAN ENGINEER</text>
+<text x="511" y="34" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#60a5fa" letter-spacing="3">AI ASSISTANT</text>
+
+<ellipse cx="169" cy="130" rx="62" ry="58" fill="none" stroke="#3dd68c" stroke-width="1.5" opacity="0.4"/>
+<ellipse cx="169" cy="128" rx="55" ry="52" fill="none" stroke="#3dd68c" stroke-width="0.8" opacity="0.3"/>
+
+<path d="M130 115 Q125 95 140 85 Q155 75 169 82 Q183 75 198 85 Q213 95 208 115 Q218 125 214 140 Q210 155 198 158 Q190 170 169 172 Q148 170 140 158 Q128 155 124 140 Q120 125 130 115Z" fill="#0d2010" stroke="#3dd68c" stroke-width="1.5"/>
+
+<path d="M169 82 Q169 105 160 118 Q155 128 169 135 Q183 128 178 118 Q169 105 169 82" fill="none" stroke="#3dd68c" stroke-width="1" opacity="0.6"/>
+<path d="M130 115 Q145 110 155 120 Q162 130 158 142" fill="none" stroke="#3dd68c" stroke-width="0.8" opacity="0.5"/>
+<path d="M208 115 Q193 110 183 120 Q176 130 180 142" fill="none" stroke="#3dd68c" stroke-width="0.8" opacity="0.5"/>
+<path d="M135 100 Q150 97 158 108" fill="none" stroke="#3dd68c" stroke-width="0.7" opacity="0.4"/>
+<path d="M203 100 Q188 97 180 108" fill="none" stroke="#3dd68c" stroke-width="0.7" opacity="0.4"/>
+
+<circle cx="148" cy="105" r="3" fill="#3dd68c" opacity="0.9"/>
+<circle cx="169" cy="95" r="3" fill="#3dd68c" opacity="0.9"/>
+<circle cx="190" cy="105" r="3" fill="#3dd68c" opacity="0.9"/>
+<circle cx="140" cy="128" r="3" fill="#3dd68c" opacity="0.9"/>
+<circle cx="198" cy="128" r="3" fill="#3dd68c" opacity="0.9"/>
+<circle cx="158" cy="148" r="3" fill="#3dd68c" opacity="0.9"/>
+<circle cx="180" cy="148" r="3" fill="#3dd68c" opacity="0.9"/>
+<circle cx="169" cy="135" r="4" fill="#3dd68c"/>
+
+<line x1="169" y1="135" x2="148" y2="105" stroke="#3dd68c" stroke-width="0.8" opacity="0.6"/>
+<line x1="169" y1="135" x2="169" y2="95" stroke="#3dd68c" stroke-width="0.8" opacity="0.6"/>
+<line x1="169" y1="135" x2="190" y2="105" stroke="#3dd68c" stroke-width="0.8" opacity="0.6"/>
+<line x1="169" y1="135" x2="140" y2="128" stroke="#3dd68c" stroke-width="0.8" opacity="0.6"/>
+<line x1="169" y1="135" x2="198" y2="128" stroke="#3dd68c" stroke-width="0.8" opacity="0.6"/>
+<line x1="169" y1="135" x2="158" y2="148" stroke="#3dd68c" stroke-width="0.8" opacity="0.6"/>
+<line x1="169" y1="135" x2="180" y2="148" stroke="#3dd68c" stroke-width="0.8" opacity="0.6"/>
+
+<line x1="107" y1="105" x2="128" y2="118" stroke="#3dd68c" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+<line x1="107" y1="135" x2="124" y2="130" stroke="#3dd68c" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+<line x1="107" y1="160" x2="130" y2="148" stroke="#3dd68c" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+<line x1="169" y1="172" x2="169" y2="188" stroke="#3dd68c" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+<line x1="231" y1="105" x2="210" y2="118" stroke="#3dd68c" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+<line x1="231" y1="135" x2="214" y2="130" stroke="#3dd68c" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+
+<rect x="36" y="92" width="68" height="22" rx="11" fill="#0d2515" stroke="#3dd68c" stroke-width="0.8"/>
+<text x="70" y="107" text-anchor="middle" font-family="monospace" font-size="9" fill="#3dd68c">Intuition</text>
+
+<rect x="36" y="122" width="68" height="22" rx="11" fill="#0d2515" stroke="#3dd68c" stroke-width="0.8"/>
+<text x="70" y="137" text-anchor="middle" font-family="monospace" font-size="9" fill="#3dd68c">Experience</text>
+
+<rect x="36" y="148" width="68" height="22" rx="11" fill="#0d2515" stroke="#3dd68c" stroke-width="0.8"/>
+<text x="70" y="163" text-anchor="middle" font-family="monospace" font-size="9" fill="#3dd68c">Context</text>
+
+<rect x="156" y="185" width="68" height="22" rx="11" fill="#0d2515" stroke="#3dd68c" stroke-width="0.8"/>
+<text x="190" y="200" text-anchor="middle" font-family="monospace" font-size="9" fill="#3dd68c">Judgement</text>
+
+<rect x="236" y="92" width="68" height="22" rx="11" fill="#0d2515" stroke="#3dd68c" stroke-width="0.8"/>
+<text x="270" y="107" text-anchor="middle" font-family="monospace" font-size="9" fill="#3dd68c">Ownership</text>
+
+<rect x="236" y="122" width="68" height="22" rx="11" fill="#0d2515" stroke="#3dd68c" stroke-width="0.8"/>
+<text x="270" y="137" text-anchor="middle" font-family="monospace" font-size="9" fill="#3dd68c">Creativity</text>
+
+<rect x="36" y="228" width="266" height="1" fill="#3dd68c" opacity="0.15"/>
+
+<text x="45" y="252" font-family="monospace" font-size="8.5" fill="#3dd68c" opacity="0.7">&#x2713;  Understands full system context</text>
+<text x="45" y="267" font-family="monospace" font-size="8.5" fill="#3dd68c" opacity="0.7">&#x2713;  Connects dots across teams</text>
+<text x="45" y="282" font-family="monospace" font-size="8.5" fill="#3dd68c" opacity="0.7">&#x2713;  Asks the right human question</text>
+<text x="45" y="297" font-family="monospace" font-size="8.5" fill="#3dd68c" opacity="0.7">&#x2713;  Adapts when info is incomplete</text>
+<text x="45" y="312" font-family="monospace" font-size="8.5" fill="#3dd68c" opacity="0.7">&#x2713;  Owns the decision end-to-end</text>
+
+<rect x="50" y="338" width="238" height="36" rx="6" fill="#0d2515" stroke="#3dd68c" stroke-width="1"/>
+<text x="169" y="352" text-anchor="middle" font-family="monospace" font-size="8" fill="#3dd68c" opacity="0.8">ROOT CAUSE FOUND</text>
+<text x="169" y="366" text-anchor="middle" font-family="monospace" font-size="9" font-weight="700" fill="#3dd68c">Network VM restart &#x2192; Node down</text>
+
+<rect x="379" y="68" width="264" height="130" rx="8" fill="#090f1f" stroke="#1e2a44" stroke-width="1"/>
+
+<rect x="400" y="88" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="430" y="88" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="460" y="88" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="490" y="88" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="520" y="88" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="550" y="88" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="415" y="118" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="445" y="118" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="475" y="118" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="505" y="118" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="535" y="118" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="400" y="148" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="430" y="148" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="460" y="148" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="490" y="148" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="520" y="148" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+<rect x="550" y="148" width="20" height="20" rx="2" fill="#0a1628" stroke="#60a5fa" stroke-width="0.8"/>
+
+<line x1="410" y1="108" x2="425" y2="118" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="440" y1="108" x2="425" y2="118" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="440" y1="108" x2="455" y2="118" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="470" y1="108" x2="455" y2="118" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="470" y1="108" x2="485" y2="118" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="500" y1="108" x2="485" y2="118" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="500" y1="108" x2="515" y2="118" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="530" y1="108" x2="515" y2="118" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="530" y1="108" x2="545" y2="118" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="560" y1="108" x2="545" y2="118" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="425" y1="138" x2="410" y2="148" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="425" y1="138" x2="440" y2="148" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="455" y1="138" x2="440" y2="148" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="455" y1="138" x2="470" y2="148" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="485" y1="138" x2="470" y2="148" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="485" y1="138" x2="500" y2="148" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="515" y1="138" x2="500" y2="148" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="515" y1="138" x2="530" y2="148" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="545" y1="138" x2="530" y2="148" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+<line x1="545" y1="138" x2="560" y2="148" stroke="#60a5fa" stroke-width="0.6" opacity="0.4"/>
+
+<rect x="379" y="228" width="264" height="1" fill="#60a5fa" opacity="0.15"/>
+
+<text x="389" y="252" font-family="monospace" font-size="8.5" fill="#60a5fa" opacity="0.7">&#x2713;  Parse and summarise logs fast</text>
+<text x="389" y="267" font-family="monospace" font-size="8.5" fill="#60a5fa" opacity="0.7">&#x2713;  Suggest kubectl commands</text>
+<text x="389" y="282" font-family="monospace" font-size="8.5" fill="#60a5fa" opacity="0.7">&#x2713;  Draft incident reports</text>
+<text x="389" y="297" font-family="monospace" font-size="8.5" fill="#f87171" opacity="0.9">&#x2717;  Works only on what you give it</text>
+<text x="389" y="312" font-family="monospace" font-size="8.5" fill="#f87171" opacity="0.9">&#x2717;  No cross-team awareness</text>
+
+<rect x="394" y="338" width="238" height="36" rx="6" fill="#1a0a0a" stroke="#f87171" stroke-width="1"/>
+<text x="513" y="352" text-anchor="middle" font-family="monospace" font-size="8" fill="#f87171" opacity="0.8">PARTIAL INPUT = WRONG OUTPUT</text>
+<text x="513" y="366" text-anchor="middle" font-family="monospace" font-size="9" font-weight="700" fill="#f87171">Cannot lead. Can only assist.</text>
+
+<rect x="200" y="175" width="280" height="28" rx="5" fill="#1a0f05" stroke="#ff6b35" stroke-width="1.2"/>
+<text x="340" y="184" text-anchor="middle" font-family="monospace" font-size="7" fill="#ff6b35" opacity="0.8">THE ENGINEER WHO USES AI EFFECTIVELY</text>
+<text x="340" y="196" text-anchor="middle" font-family="monospace" font-size="8" font-weight="700" fill="#ff6b35">REPLACES THE ONE WHO DOESN'T</text>
+
+</svg>

@@ -6,6 +6,7 @@ excerpt: "A Saturday-night oncall. A cascading Redis failure. A bottom-up invest
 readTime: "8 min read"
 featured: true
 author: "Shantayya Swami"
+image: "/images/human_vs_ai_hero.svg"
 ---
 
 > **TL;DR:** A P2 incident caused by a network-team VM restart cascaded into Kubernetes node restarts → all Redis Cluster pod restarts → batch job failures via `QueryTimeoutException`. The restarted K8s nodes were exclusively hosting the Redis Cluster pods. Root cause required cross-team context, Kibana log correlation, K8s event analysis, and historical knowledge of a concurrent P1. AI assisted — but couldn't have *led* the investigation.
