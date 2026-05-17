@@ -36,11 +36,11 @@ const social = [
 </footer>
 
 <script>
-  fetch('https://api.countapi.xyz/hit/shantayyaswami.com/visits')
+  fetch('https://api.counterapi.dev/v1/shantayyaswami/visits/up')
     .then(res => res.json())
     .then(data => {
       const el = document.getElementById('visitor-count');
-      if (el) el.textContent = data.value.toLocaleString();
+      if (el) el.textContent = data.count.toLocaleString();
     })
     .catch(() => {
       const el = document.getElementById('visitor-count');
