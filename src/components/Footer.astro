@@ -16,12 +16,9 @@ const social = [
         <a href="https://astro.build" target="_blank" rel="noopener noreferrer"
            class="text-accent hover:underline">Astro</a>
       </p>
-      <a href="https://hits.seeyoufarm.com" target="_blank" rel="noopener noreferrer">
-        <img
-          src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fshantayyaswami.com&count_bg=%236B7280&title_bg=%231F2937&icon=&title=visitors&edge_flat=true"
-          alt="Visitor count"
-        />
-      </a>
+      <p class="font-mono text-xs text-muted">
+        <span id="visitor-count">—</span> visitors
+      </p>
     </div>
     <ul class="flex items-center gap-6">
       {social.map(({ href, label }) => (
@@ -37,3 +34,16 @@ const social = [
     </ul>
   </div>
 </footer>
+
+<script>
+  fetch('https://api.countapi.xyz/hit/shantayyaswami.com/visits')
+    .then(res => res.json())
+    .then(data => {
+      const el = document.getElementById('visitor-count');
+      if (el) el.textContent = data.value.toLocaleString();
+    })
+    .catch(() => {
+      const el = document.getElementById('visitor-count');
+      if (el) el.textContent = '--';
+    });
+</script>
