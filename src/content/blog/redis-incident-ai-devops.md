@@ -158,4 +158,4 @@ Use it to move faster once you understand the problem. Don't expect it to unders
 ---
 
 > *"Whatever progress AI makes — agentic AI, LLMs, autonomous agents — the engineer who truly understands their system will always be the one who knows which question to ask, which ticket to pull, and which node name to remember."*  
-> — Shantayya Swami · shantayyaswami.com
+> — Shantayya Swami
