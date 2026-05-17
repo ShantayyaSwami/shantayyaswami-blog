@@ -134,9 +134,6 @@ I use Copilot and LLMs regularly. But this triage made the limits crystal clear.
 
 > **The Partial Input Problem:** AI works on what you feed it. During live triage, information arrives in fragments. At the start I didn't know about the P1, the VM restarts, or which nodes Redis was on. An AI fed partial context mid-investigation would have given confidently wrong answers. The engineer's job is to *gather and connect* that context first.
 
-> *"It is not AI that will replace DevOps engineers. It is the DevOps engineer who uses AI effectively who will replace the one who doesn't."*  
-> — Shantayya Swami
-
 ---
 
 ## Key Takeaways
@@ -158,5 +155,5 @@ Use it to move faster once you understand the problem. Don't expect it to unders
 
 ---
 
-> *"Whatever progress AI makes — agentic AI, LLMs, autonomous agents — the engineer who truly understands their system will always be the one who knows which question to ask, which ticket to pull, and which node name to remember."*  
+> *"It is not AI that will replace DevOps engineers. It is the DevOps engineer who uses AI effectively who will replace the one who doesn't."*  
 > — Shantayya Swami
