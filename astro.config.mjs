@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   site: 'https://shantayyaswami.com',
+  trailingSlash: 'never',
   integrations: [
     tailwind({ applyBaseStyles: false }),
     sitemap(),
