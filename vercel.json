@@ -3,13 +3,5 @@
   "outputDirectory": "dist",
   "framework": "astro",
   "devCommand": "npm run dev",
-  "installCommand": "npm install",
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.shantayyaswami.com" }],
-      "destination": "https://shantayyaswami.com/:path*",
-      "permanent": true
-    }
-  ]
+  "installCommand": "npm install"
 }
