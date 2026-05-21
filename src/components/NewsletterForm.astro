@@ -8,6 +8,7 @@ const { compact = false } = Astro.props;
 <form id="nl-form" class="flex gap-3 flex-col sm:flex-row">
   <input
     type="email"
+    name="email_address"
     required
     placeholder="your@email.com"
     class:list={[
@@ -18,9 +19,10 @@ const { compact = false } = Astro.props;
   />
   <button
     type="submit"
+    id="nl-btn"
     class:list={[
       'bg-accent hover:bg-accent/90 text-white font-mono text-sm font-medium',
-      'rounded-xl transition-colors whitespace-nowrap',
+      'rounded-xl transition-colors whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed',
       compact ? 'px-5 py-2.5' : 'px-6 py-3',
     ]}
   >
@@ -30,11 +32,38 @@ const { compact = false } = Astro.props;
 <p id="nl-msg" class="font-mono text-xs text-teal hidden mt-2">
   You're in! Welcome aboard.
 </p>
+<p id="nl-err" class="font-mono text-xs text-red-400 hidden mt-2">
+  Something went wrong. Please try again.
+</p>
 
 <script>
-  document.getElementById('nl-form')?.addEventListener('submit', (e) => {
+  document.getElementById('nl-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    document.getElementById('nl-msg')?.classList.remove('hidden');
-    (e.target as HTMLFormElement).reset();
+    const form = e.target as HTMLFormElement;
+    const btn = document.getElementById('nl-btn') as HTMLButtonElement;
+    const email = (form.elements.namedItem('email_address') as HTMLInputElement).value;
+
+    btn.disabled = true;
+    btn.textContent = 'Subscribing…';
+
+    try {
+      const res = await fetch('https://app.kit.com/forms/9468711/subscriptions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ email_address: email }),
+      });
+
+      if (res.ok) {
+        document.getElementById('nl-msg')?.classList.remove('hidden');
+        form.reset();
+      } else {
+        document.getElementById('nl-err')?.classList.remove('hidden');
+      }
+    } catch {
+      document.getElementById('nl-err')?.classList.remove('hidden');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+    }
   });
 </script>
