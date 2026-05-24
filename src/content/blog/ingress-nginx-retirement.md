@@ -6,6 +6,7 @@ excerpt: "CNCF broke the news. This post answers the question everyone's actuall
 readTime: "9 min read"
 featured: true
 author: "Shantayya Swami"
+image: "/images/ingress-nginx-retirement-hero.png"
 ---
 
 > **This Is Not a Drill:** As of March 2026, ingress-nginx is officially retired. The repository is archived and read-only. No more releases, no bug fixes, no security patches — ever. A post-retirement survey found **44% of users had no migration plan**. If you're reading this, now is the time to act.
