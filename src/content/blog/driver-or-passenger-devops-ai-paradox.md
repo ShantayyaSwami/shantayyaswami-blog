@@ -181,7 +181,7 @@ That answer tells the interviewer you're in the driver's seat. The whiteboard te
 
 ---
 
-## TL;DR
+## Closing Thoughts
 
 AI is not the threat. **Passive engineering is the threat**, and AI just makes it cheaper than ever to be passive.
 
@@ -192,3 +192,7 @@ Stay in the driver's seat. Your future self — the one being interviewed, the o
 ---
 
 *If this resonated, share it with one engineer on your team and ask them: where are we driving, and where are we just along for the ride?*
+
+---
+
+> **TL;DR:** Use AI as heavily as you want — but stay in the driver's seat. Passive use makes you duller; intentional use makes you sharper. The 2 AM incident and the whiteboard interview will reveal which one you've been doing.
