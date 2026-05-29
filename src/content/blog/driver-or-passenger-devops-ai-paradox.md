@@ -195,4 +195,4 @@ Stay in the driver's seat. Your future self — the one being interviewed, the o
 
 ---
 
-> **TL;DR:** Use AI as heavily as you want — but stay in the driver's seat. Passive use makes you duller; intentional use makes you sharper. The 2 AM incident and the whiteboard interview will reveal which one you've been doing.
+> *"Use AI as heavily as you want — but stay in the driver's seat. Passive use makes you duller; intentional use makes you sharper. The 2 AM incident and the whiteboard interview will reveal which one you've been doing."*
