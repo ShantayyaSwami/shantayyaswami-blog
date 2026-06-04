@@ -1,10 +1,10 @@
 ---
 title: "TLS Mastery — Part 2: HTTPS, Certificates, CAs, PKI & the 3 Certificate Types"
-date: 2026-05-30
+date: 2026-06-04
 tags: ["TLS", "HTTPS", "Certificate Authority", "PKI", "Chain of Trust", "Certificate Types", "Security", "Networking"]
 excerpt: "What HTTPS is, what a certificate contains, how CAs create trust through signing, the root/intermediate chain, PKI, and the three certificate types (public, corporate, self-signed) compared."
 readTime: "10 min read"
-featured: false
+featured: true
 author: "Shantayya Swami"
 image: "/images/TLS-Mastery-Part2.png"
 ---
