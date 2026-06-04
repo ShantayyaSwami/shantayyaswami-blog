@@ -25,7 +25,7 @@ In this part:
 
 ## HTTPS in one line
 
-**HTTPS is simply HTTP wrapped in TLS encryption.** Plain HTTP sends data in the clear; HTTPS encrypts the communication between client (usually your browser) and server.
+**HTTPS is HTTP running over TLS.** Plain HTTP sends data in the clear and offers no way to verify who you're talking to; HTTPS encrypts the communication, authenticates the server, and protects against tampering — the three problems TLS was built to solve.
 
 Modern browsers flag plain HTTP as **"Not secure"** and often make you click through warnings. HTTPS gives you the padlock. Benefits:
 
