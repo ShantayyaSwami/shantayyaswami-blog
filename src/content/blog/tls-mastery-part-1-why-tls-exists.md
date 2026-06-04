@@ -166,13 +166,13 @@ In **Part 2** we'll use these ideas to explain **HTTPS, certificates, Certificat
 | Part | Topic |
 |:--|:--|
 | **Part 1 — You are here** | Why TLS Exists & The Cryptography Behind It |
-| Part 2 | HTTPS, Certificates, CAs, PKI & the 3 Certificate Types |
+| [Part 2](/blog/tls-mastery-part-2-https-certificates-ca-pki) | HTTPS, Certificates, CAs, PKI & the 3 Certificate Types |
 | Part 3 | The Handshake (Classic vs Modern), Versions & SNI |
 | Part 4 | OpenSSL: Self-Signed Cert + NGINX |
 | Part 5 | Build Your Own CA: Root → Intermediate → Leaf, CSR & SAN |
 | Part 6 | Formats, Revocation, Let's Encrypt & HSTS |
 | Part 7 | Kubernetes Ingress TLS (SSL Offloading) |
 | Part 8 | mTLS, Client Certs & cert-manager |
-| Part 9 | End-to-End: F5 → Ingress → Backend |
+| Part 9 | End-to-End: Load Balancer → Ingress → Backend |
 | Part 10 | Designing TLS Across Environments |
 | Part 11 | Common Certificate Errors |
