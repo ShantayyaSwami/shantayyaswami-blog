@@ -67,10 +67,8 @@ Everyone here has a key pair — the CA, your server, even users. When a CA issu
 1. Takes **your domain's public key** (plus your identity info).
 2. **Signs** it with the **CA's own private key**.
 
-```mermaid
-flowchart LR
-    YP["Your public key + identity"] --> SIGN[CA signs it<br/>with CA private key]
-    SIGN --> CERT["Your certificate<br/>signed by the CA"]
+```
+Your public key + identity  →  [CA signs with CA private key]  →  Your certificate (signed by CA)
 ```
 
 Why does this help? Because the matching **CA public key is already built into every browser and operating system**. You can see the list yourself:
@@ -85,13 +83,12 @@ When your browser receives a certificate, it uses the CA's public key (already t
 
 In practice, a top-level **root CA** rarely signs domain certificates directly. It delegates to **intermediate CAs**, which sign the actual domain (leaf) certificates. This forms a **certificate chain**:
 
-```mermaid
-flowchart TB
-    ROOT["Root CA<br/>e.g. DigiCert Global Root"]
-    INT["Intermediate CA"]
-    LEAF["Your domain certificate<br/>e.g. github.com"]
-    ROOT -->|signs| INT
-    INT -->|signs| LEAF
+```
+Root CA (e.g. DigiCert Global Root)
+    │
+    └─ signs ──▶  Intermediate CA
+                       │
+                       └─ signs ──▶  Your domain certificate (e.g. github.com)
 ```
 
 Click the padlock on any HTTPS site — certificate details, and you'll see exactly this hierarchy. A **root certificate** is just the CA's own public certificate. Roots are **self-signed** (a root signs its own certificate, because there's no higher authority) — which is fine, because roots are pre-distributed and trusted.
@@ -119,10 +116,8 @@ Key components:
 
 What if you don't want to (or can't) go to a CA — say, for testing? You can sign your own public key with **your own private key**. That's a **self-signed certificate** — not vouched for by any external CA.
 
-```mermaid
-flowchart LR
-    MP["My public key"] --> SS[Signed with<br/>MY OWN private key]
-    SS --> SC["Self-signed certificate"]
+```
+My public key  →  [signed with MY OWN private key]  →  Self-signed certificate
 ```
 
 **Advantages:**
@@ -145,17 +140,10 @@ Encryption without trusted identity isn't enough for the public internet — whi
 
 People talk about "third-party", "corporate", and "self-signed" certs as different things. They're the **same x509 certificates**, differing in only one way: **who controls the chain that signs them.**
 
-```mermaid
-flowchart TB
-    subgraph "Third-party (Public CA)"
-    PR[Public Root] --> PI[Public Intermediate] --> PL[Your leaf]
-    end
-    subgraph "Corporate (Private CA)"
-    CR[Your Root] --> CI[Your Intermediate] --> CL[Your leaf]
-    end
-    subgraph "Self-signed"
-    SL[Leaf signs itself - no CA]
-    end
+```
+Third-party (Public CA):   Public Root → Public Intermediate → Your leaf
+Corporate (Private CA):    Your Root   → Your Intermediate   → Your leaf
+Self-signed:               Leaf signs itself (no CA)
 ```
 
 | | Third-party (Public CA) | Corporate (Private CA) | Self-signed |
