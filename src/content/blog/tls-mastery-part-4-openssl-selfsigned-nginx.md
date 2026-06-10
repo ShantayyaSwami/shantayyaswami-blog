@@ -47,23 +47,28 @@ To get a certificate from a CA, you don't hand over a bare public key — you se
 - (and the public key)
 
 ```
-  Private key           Domain, Org, Country,
-  (kept secret)    +    Email + Public key
-         \               /
-          \             /
-           v           v
-            [CSR file]
-                |
-             send to
-                v
-     [Certificate Authority (CA)]
-                |
-          verifies + signs
-                v
-       [Signed certificate .crt]
-                |
-                v
-       [Install on your server]
+  Private key                      Domain, Org, Country, Email
+  (never leaves your server)                   |
+         |                                     |
+  derives public key                           |
+         v                                     |
+     Public key  +---------------------------+
+                  \                         /
+                   v                       v
+                         [CSR file]
+                              |
+                           send to
+                              v
+                  [Certificate Authority (CA)]
+                              |
+                       verifies + signs
+                              v
+                     [Signed certificate .crt]
+                              |
+                              v
+                     [Install .crt on server]
+                     (private key already there —
+                      never sent anywhere)
 ```
 
 The CA reads the CSR, verifies you own the domain, checks the details, and only then issues a signed certificate.
