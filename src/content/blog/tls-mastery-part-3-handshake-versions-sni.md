@@ -182,4 +182,4 @@ You now understand:
 
 In **Part 4** we get hands-on with **OpenSSL**: certificate types, the CSR, a self-signed certificate, and enabling TLS on nginx.
 
-*Previous: [Part 2 — HTTPS, Certificates, CAs, PKI & the 3 Certificate Types «](/blog/tls-mastery-part-2-https-certificates-ca-pki) · Next: Part 4 — Hands-On OpenSSL: Self-Signed Cert + nginx »*
+*Previous: [Part 2 — HTTPS, Certificates, CAs, PKI & the 3 Certificate Types «](/blog/tls-mastery-part-2-https-certificates-ca-pki) · Next: [Part 4 — Hands-On OpenSSL: Self-Signed Cert + nginx »](/blog/tls-mastery-part-4-openssl-selfsigned-nginx)*
