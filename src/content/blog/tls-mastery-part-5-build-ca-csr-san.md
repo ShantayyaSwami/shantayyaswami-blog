@@ -233,4 +233,4 @@ You can now build a full root → intermediate → leaf chain, issue SAN-correct
 
 In **Part 6** we cover the **real-world bits** the tutorials skip: certificate **file formats** (PEM/DER/PFX), **revocation** (CRL/OCSP/stapling), **Let's Encrypt + ACME** for free automated certs, and **HSTS**.
 
-*Previous: [Part 4 — Hands-On OpenSSL: Self-Signed Cert + nginx «](/blog/tls-mastery-part-4-openssl-selfsigned-nginx) · Next: Part 6 — Formats, Revocation, Let's Encrypt & HSTS »*
+*Previous: [Part 4 — Hands-On OpenSSL: Self-Signed Cert + nginx «](/blog/tls-mastery-part-4-openssl-selfsigned-nginx) · Next: [Part 6 — Formats, Revocation, Let's Encrypt & HSTS »](/blog/tls-mastery-part-6-formats-revocation-letsencrypt-hsts)*
