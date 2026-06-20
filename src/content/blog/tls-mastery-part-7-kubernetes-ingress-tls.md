@@ -71,8 +71,8 @@ By default, traffic to backend pods is **unencrypted HTTP**. We want public-faci
 ```mermaid
 flowchart LR
     U[User] -->|HTTPS encrypted| IC[Ingress Controller<br/>holds TLS secrets]
-    IC -->|HTTP plain - internal network| S1[app1 service]
-    IC -->|HTTP plain - internal network| S2[app2 service]
+    IC -->|HTTP plain - app1.com| S1[app1 service]
+    IC -->|HTTP plain - app2.com| S2[app2 service]
 ```
 
 - **User → Ingress controller:** encrypted HTTPS (crosses the public network — must be secure).
