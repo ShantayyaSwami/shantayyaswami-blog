@@ -29,13 +29,11 @@ In this part:
 
 In Kubernetes, **Ingress** is an object that defines the **rules** for how external traffic reaches your apps — by hostname or URL path. Those rules are enforced by an **Ingress controller**: an actual running pod (Traefik, nginx, HAProxy, or a cloud load balancer) that reads Ingress objects and reconfigures itself automatically.
 
-```mermaid
-flowchart LR
-    U[Browser] --> IC[Ingress Controller<br/>Traefik, nginx, HAProxy]
-    IC -->|app1.com| A1[Service: app1]
-    IC -->|app2.com| A2[Service: app2]
-    A1 --> P1[Pods]
-    A2 --> P2[Pods]
+```
+Browser  ──>  Ingress Controller  (Traefik, nginx, HAProxy)
+               │
+               ├─ app1.com ──>  Service: app1  ──>  Pods
+               └─ app2.com ──>  Service: app2  ──>  Pods
 ```
 
 Without Ingress you'd expose each app via a NodePort or its own LoadBalancer. Ingress gives one smart entry point.
@@ -44,20 +42,18 @@ Without Ingress you'd expose each app via a NodePort or its own LoadBalancer. In
 
 **Host-based (name-based):**
 
-```mermaid
-flowchart LR
-    IC[Ingress Controller]
-    IC -->|cart.amazon.in| C[cart-service]
-    IC -->|wishlist.amazon.in| W[wishlist-service]
+```
+Ingress Controller
+  ├─ cart.amazon.in     ──>  cart-service
+  └─ wishlist.amazon.in ──>  wishlist-service
 ```
 
 **Path-based:**
 
-```mermaid
-flowchart LR
-    IC[Ingress Controller]
-    IC -->|/cart| C[cart-service]
-    IC -->|/wishlist| W[wishlist-service]
+```
+Ingress Controller
+  ├─ /cart     ──>  cart-service
+  └─ /wishlist ──>  wishlist-service
 ```
 
 ---
@@ -72,11 +68,12 @@ By default, traffic to backend pods is **unencrypted HTTP**. We want public-faci
 
 **C — TLS at the Ingress controller (what we'll do):** since the controller is already the entry point, put the certificates there.
 
-```mermaid
-flowchart LR
-    U[User] -->|HTTPS encrypted| IC[Ingress Controller<br/>holds TLS secrets]
-    IC -->|HTTP plain - app1.com| S1[app1 service]
-    IC -->|HTTP plain - app2.com| S2[app2 service]
+```
+User  ──[HTTPS encrypted]──────────────────────>  Ingress Controller
+                                                  (holds TLS secrets)
+                                                   │
+                                                   ├─ HTTP plain (app1.com) ──>  app1 service
+                                                   └─ HTTP plain (app2.com) ──>  app2 service
 ```
 
 - **User → Ingress controller:** encrypted HTTPS (crosses the public network — must be secure).
@@ -195,18 +192,17 @@ kubectl apply -f ingress.yaml
 
 Refresh over HTTPS. Because the cert is **self-signed**, the browser still warns — but inspect it and you'll see your issuer and that it's issued to `mynginx.com`. **TLS is terminating at the Ingress.** With a trusted-CA cert you'd get a clean padlock.
 
-```mermaid
-sequenceDiagram
-    participant U as Browser
-    participant T as Traefik Ingress - TLS terminates here
-    participant S as Backend Service or Pod
+```
+Browser  ──── HTTPS request to mynginx.com ───────────────────>  Traefik Ingress
+                                                                  [TLS terminates here]
+         <─────────────────────────────────────────────────────
+              Presents cert from my-tls-secret
+              Completes TLS handshake, decrypts request
 
-    U->>T: HTTPS request to mynginx.com
-    Note over T: Presents cert from my-tls-secret
-    Note over T: completes handshake, decrypts
-    T->>S: Plain HTTP (internal network)
-    S->>T: Plain HTTP response
-    T->>U: HTTPS response (re-encrypted)
+Traefik  ──── Plain HTTP (internal network) ──────────────────>  Backend Service / Pod
+         <─── Plain HTTP response ─────────────────────────────
+
+Traefik  ──── HTTPS response (re-encrypted) ──────────────────>  Browser
 ```
 
 ### Multiple domains, one controller
@@ -245,14 +241,12 @@ Everything so far used a **server certificate**: the *server* proves its identit
 
 A **client certificate** flips it: the *client* proves its identity to the *server*. The server requests a certificate during the handshake, the client presents one signed by a CA the server trusts, and the server verifies it.
 
-```mermaid
-flowchart LR
-    subgraph sauth[Server auth - normal HTTPS]
-    B1[Browser] -->|validates| S1[Server cert]
-    end
-    subgraph cauth[Client auth]
-    S2[Server] -->|requests and validates| C2[Client cert]
-    end
+```
+Server auth (normal HTTPS):
+  Browser  ──[validates]──────────────────>  Server cert
+
+Client auth:
+  Server   ──[requests + validates]───────>  Client cert
 ```
 
 Like server certs, client certs must be signed by a CA the **other side** trusts — otherwise the server rejects them even if they look valid. All of these follow the **x509** standard.
@@ -263,16 +257,15 @@ Like server certs, client certs must be signed by a CA the **other side** trusts
 
 **Mutual TLS** is simply both directions at once: the server proves itself to the client **and** the client proves itself to the server. Neither talks to an unverified party.
 
-```mermaid
-sequenceDiagram
-    participant C as Client
-    participant S as Server
-    C->>S: ClientHello
-    S->>C: Server certificate + CertificateRequest
-    C->>S: Client certificate
-    Note over S: Verify client cert against trusted CA
-    Note over C: Verify server cert against trusted CA
-    Note over C,S: Both authenticated - encrypted channel open
+```
+Client  ──── ClientHello ──────────────────────────────────────>  Server
+        <─── Server certificate + CertificateRequest ────────────
+Client  ──── Client certificate ──────────────────────────────>  Server
+
+        Server: verify client cert against trusted CA
+        Client: verify server cert against trusted CA
+
+        Both authenticated — encrypted channel open
 ```
 
 mTLS is common for **service-to-service** communication, internal APIs, and zero-trust networks, where you want strong cryptographic identity on **both** ends rather than passwords or API keys alone.
@@ -299,12 +292,13 @@ users:
     client-key-data:         <base64 client key>
 ```
 
-```mermaid
-flowchart LR
-    K[kubectl] -->|sends client cert and key| API[API Server]
-    API -->|verifies against cluster CA| OK{Trusted?}
-    OK -->|yes| ALLOW[Authenticated - action allowed]
-    OK -->|no| DENY[Rejected]
+```
+kubectl  ──[sends client cert + key]──────────>  API Server
+                                                  │
+                                                  └─ verify against cluster CA
+                                                       │
+                                                       ├─ trusted? YES ──>  Authenticated - action allowed
+                                                       └─ trusted? NO  ──>  Rejected
 ```
 
 Here the **server (API server) validates the client (you)** — the reverse of the browser-to-bank case. The client certificate must be signed by the cluster's CA, which is exactly why simply having *a* certificate isn't enough; it must be signed by a CA the API server trusts. (Authentication only proves *who* you are; **RBAC** then decides *what* you're allowed to do.)
@@ -326,14 +320,15 @@ cert-manager is a controller that **obtains, stores, and auto-renews** certifica
 - **Issuer / ClusterIssuer** — *where* certificates come from (e.g. Let's Encrypt via ACME, your own CA, or self-signed). An `Issuer` is namespaced; a `ClusterIssuer` works cluster-wide.
 - **Certificate** — a request for a cert, which cert-manager fulfils and stores in a **TLS Secret** (the same kind your Ingress already consumes).
 
-```mermaid
-flowchart LR
-    CI[ClusterIssuer<br/>Lets Encrypt ACME] --> CM[cert-manager controller]
-    ING[Ingress annotation<br/>cluster-issuer: letsencrypt-prod] --> CM
-    CM -->|solves ACME challenge| LE[Lets Encrypt]
-    LE -->|issues cert| CM
-    CM -->|creates and renews| SEC[TLS Secret]
-    SEC --> ING2[Ingress uses it for HTTPS]
+```
+ClusterIssuer (Let's Encrypt ACME)  ──>  cert-manager controller  <──  Ingress annotation
+                                          │                              (cluster-issuer: letsencrypt-prod)
+                                          ├──[solves ACME challenge]──>  Let's Encrypt
+                                          │  <──[issues cert]───────────
+                                          │
+                                          └──[creates and renews]──>  TLS Secret
+                                                                        │
+                                                                        └──>  Ingress uses it for HTTPS
 ```
 
 ### Install cert-manager
