@@ -1,6 +1,6 @@
 ---
 title: "TLS Mastery — Part 7: TLS for Kubernetes Ingress (SSL Offloading)"
-date: 2026-05-30
+date: 2026-06-20
 tags: ["TLS", "Kubernetes", "Ingress", "SSL Offloading", "TLS Termination", "Traefik"]
 excerpt: "Secure traffic into a Kubernetes cluster: what Ingress is, how controllers route traffic, and how to terminate TLS at the Ingress using a Kubernetes TLS Secret."
 readTime: "10 min read"
