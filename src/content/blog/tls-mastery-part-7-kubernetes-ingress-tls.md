@@ -31,7 +31,7 @@ In Kubernetes, **Ingress** is an object that defines the **rules** for how exter
 
 ```mermaid
 flowchart LR
-    U[User / Browser] --> IC[Ingress Controller<br/>Traefik / nginx / HAProxy]
+    U[Browser] --> IC[Ingress Controller<br/>Traefik, nginx, HAProxy]
     IC -->|app1.com| A1[Service: app1]
     IC -->|app2.com| A2[Service: app2]
     A1 --> P1[Pods]
