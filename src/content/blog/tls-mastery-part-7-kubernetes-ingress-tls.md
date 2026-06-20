@@ -1,15 +1,15 @@
 ---
-title: "TLS Mastery — Part 7: TLS for Kubernetes Ingress (SSL Offloading)"
+title: "TLS Mastery — Part 7: Kubernetes Ingress TLS (SSL Offloading) | mTLS, Client Certs & cert-manager"
 date: 2026-06-20
-tags: ["TLS", "Kubernetes", "Ingress", "SSL Offloading", "TLS Termination", "Traefik"]
-excerpt: "Secure traffic into a Kubernetes cluster: what Ingress is, how controllers route traffic, and how to terminate TLS at the Ingress using a Kubernetes TLS Secret."
-readTime: "10 min read"
+tags: ["TLS", "Kubernetes", "Ingress", "SSL Offloading", "TLS Termination", "Traefik", "mTLS", "Client Certificates", "cert-manager", "Let's Encrypt"]
+excerpt: "Secure traffic into a Kubernetes cluster — Ingress routing, TLS termination at the controller, mutual TLS with client certificates, and automating cert issuance with cert-manager."
+readTime: "18 min read"
 featured: true
 author: "Shantayya Swami"
 image: "/images/TLS-Mastery-Part7.png"
 ---
 
-With the fundamentals and OpenSSL behind us, let's bring TLS into **Kubernetes**.
+With the fundamentals and OpenSSL behind us, let's bring TLS into **Kubernetes** — and take it all the way to mutual TLS and automation.
 
 In this part:
 
@@ -18,6 +18,10 @@ In this part:
 - **TLS termination (SSL offloading)** — and where to do it
 - Creating a Kubernetes **TLS Secret**
 - Configuring an Ingress to terminate TLS, with a **Traefik** walkthrough
+- **Server vs client certificates** and what changes
+- **Mutual TLS (mTLS)** — both sides authenticate
+- How the **Kubernetes API server** authenticates you via client certs
+- **cert-manager** — automated issuance and renewal in Kubernetes
 
 ---
 
@@ -80,7 +84,7 @@ flowchart LR
 
 This is **TLS termination (SSL offloading) at the Ingress controller**. The win: apps don't carry the encryption burden, and certificates live in **one** place.
 
-> If you need encryption *all the way to the pod* (e.g. strict zero-trust / compliance), you'd use **end-to-end TLS** or a service mesh with mTLS instead — touched on in Part 8.
+> If you need encryption *all the way to the pod* (e.g. strict zero-trust / compliance), you'd use **end-to-end TLS** or a service mesh with mTLS instead — covered later in this post.
 
 ---
 
@@ -88,7 +92,7 @@ This is **TLS termination (SSL offloading) at the Ingress controller**. The win:
 
 ### 1. Get (or create) a certificate and key
 
-For production you'd get a CA-signed cert (Part 5) or use cert-manager (Part 8). For this demo, a self-signed cert in one command:
+For production you'd get a CA-signed cert (Part 5) or use cert-manager (below). For this demo, a self-signed cert in one command:
 
 ```bash
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
@@ -234,13 +238,179 @@ spec:
 
 ---
 
+## Server vs client certificates
+
+Everything so far used a **server certificate**: the *server* proves its identity to the *client* (your browser validates the site). That's the normal web case — the bank doesn't usually ask *your* browser for a certificate.
+
+A **client certificate** flips it: the *client* proves its identity to the *server*. The server requests a certificate during the handshake, the client presents one signed by a CA the server trusts, and the server verifies it.
+
+```mermaid
+flowchart LR
+    subgraph sauth[Server auth - normal HTTPS]
+    B1[Browser] -->|validates| S1[Server cert]
+    end
+    subgraph cauth[Client auth]
+    S2[Server] -->|requests and validates| C2[Client cert]
+    end
+```
+
+Like server certs, client certs must be signed by a CA the **other side** trusts — otherwise the server rejects them even if they look valid. All of these follow the **x509** standard.
+
+---
+
+## Mutual TLS (mTLS)
+
+**Mutual TLS** is simply both directions at once: the server proves itself to the client **and** the client proves itself to the server. Neither talks to an unverified party.
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+    C->>S: ClientHello
+    S->>C: Server certificate + CertificateRequest
+    C->>S: Client certificate
+    Note over S: Verify client cert against trusted CA
+    Note over C: Verify server cert against trusted CA
+    Note over C,S: Both authenticated - encrypted channel open
+```
+
+mTLS is common for **service-to-service** communication, internal APIs, and zero-trust networks, where you want strong cryptographic identity on **both** ends rather than passwords or API keys alone.
+
+---
+
+## How Kubernetes authenticates you (client certs in action)
+
+A perfect real-world example of client certificates is the Kubernetes control plane.
+
+When you run `kubectl get pods`, that request goes to the **API server**. The API server won't act until it knows *who* you are. Kubernetes supports several authentication methods:
+
+- **Client certificates** (the classic admin method)
+- **Bearer tokens** (e.g. ServiceAccount tokens)
+- **OIDC** (single sign-on with an identity provider)
+
+For the certificate method, your **kubeconfig** holds a client certificate and key:
+
+```yaml
+users:
+- name: admin
+  user:
+    client-certificate-data: <base64 client cert>
+    client-key-data:         <base64 client key>
+```
+
+```mermaid
+flowchart LR
+    K[kubectl] -->|sends client cert and key| API[API Server]
+    API -->|verifies against cluster CA| OK{Trusted?}
+    OK -->|yes| ALLOW[Authenticated - action allowed]
+    OK -->|no| DENY[Rejected]
+```
+
+Here the **server (API server) validates the client (you)** — the reverse of the browser-to-bank case. The client certificate must be signed by the cluster's CA, which is exactly why simply having *a* certificate isn't enough; it must be signed by a CA the API server trusts. (Authentication only proves *who* you are; **RBAC** then decides *what* you're allowed to do.)
+
+---
+
+## Service meshes and automatic mTLS
+
+Setting up client certificates for every microservice by hand would be painful. **Service meshes** like **Istio** and **Linkerd** automate mTLS: they inject a sidecar proxy beside each pod, issue short-lived certificates to every workload, and encrypt + mutually authenticate **all** service-to-service traffic — usually with little or no application change. If you need cluster-wide mTLS, a mesh is the standard tool rather than wiring certificates manually.
+
+---
+
+## Automating certificates with cert-manager
+
+Above we created TLS Secrets by hand. That doesn't scale — certificates expire, and short-lived ones (like Let's Encrypt's 90-day certs from Part 6) demand automation. **cert-manager** is the Kubernetes-native answer.
+
+cert-manager is a controller that **obtains, stores, and auto-renews** certificates. Its building blocks:
+
+- **Issuer / ClusterIssuer** — *where* certificates come from (e.g. Let's Encrypt via ACME, your own CA, or self-signed). An `Issuer` is namespaced; a `ClusterIssuer` works cluster-wide.
+- **Certificate** — a request for a cert, which cert-manager fulfils and stores in a **TLS Secret** (the same kind your Ingress already consumes).
+
+```mermaid
+flowchart LR
+    CI[ClusterIssuer<br/>Lets Encrypt ACME] --> CM[cert-manager controller]
+    ING[Ingress annotation<br/>cluster-issuer: letsencrypt-prod] --> CM
+    CM -->|solves ACME challenge| LE[Lets Encrypt]
+    LE -->|issues cert| CM
+    CM -->|creates and renews| SEC[TLS Secret]
+    SEC --> ING2[Ingress uses it for HTTPS]
+```
+
+### Install cert-manager
+
+```bash
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm install cert-manager jetstack/cert-manager \
+  --namespace cert-manager --create-namespace \
+  --set crds.enabled=true
+```
+
+### A Let's Encrypt ClusterIssuer
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: you@example.com
+    privateKeySecretRef:
+      name: letsencrypt-prod-account-key
+    solvers:
+      - http01:
+          ingress:
+            class: traefik       # or nginx, etc.
+```
+
+### The easy path: annotate your Ingress
+
+Instead of writing a `Certificate` resource yourself, annotate the Ingress and let cert-manager do the rest — request the cert, solve the ACME challenge, create the Secret, and renew it before expiry:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+    - hosts: ["app.example.com"]
+      secretName: app-example-tls    # cert-manager creates + fills this
+  rules:
+    - host: app.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app-service
+                port:
+                  number: 80
+```
+
+```bash
+kubectl apply -f ingress.yaml
+```
+
+cert-manager notices the annotation, obtains a real Let's Encrypt certificate for `app.example.com`, stores it in `app-example-tls`, and renews it automatically. Your Ingress consumes that Secret exactly as before — but now nothing is manual.
+
+> **Tip:** while testing, point the issuer at Let's Encrypt's **staging** ACME URL first (`acme-staging-v02`). Staging has generous rate limits; production has strict ones, and it's easy to get throttled while debugging.
+
+---
+
 ## Key takeaways
 
 - **Ingress** defines routing; an **Ingress controller** enforces it and is the cluster's entry point.
 - **TLS termination at the Ingress** keeps traffic encrypted from user to controller, then plain HTTP inside the cluster — apps stay certificate-free.
 - A **`kubernetes.io/tls` Secret** stores the cert + key (base64); reference it from the Ingress `tls` section.
-- Scales to many domains — one Secret per host.
+- **Client certificates** flip the trust direction — the *server* validates the *client*, not just the other way around.
+- **mTLS** authenticates both sides simultaneously; Kubernetes uses it for API server access, service meshes extend it to every pod.
+- **cert-manager** automates the full lifecycle — issuance, storage, and renewal — so you never manage a Secret by hand.
 
-But creating and rotating Secrets by hand doesn't scale. In **Part 8** we automate certificates with **cert-manager**, and cover **client certificates / mutual TLS (mTLS)** — including how the Kubernetes API server authenticates you.
+In **Part 8** we put all of this into a real production topology: **F5 → Ingress → backend service**, showing which certificate carries which SAN, what is validated at each hop, and exactly what `proxy-ssl-verify: "on"` checks.
 
-*Previous: [Part 6 — Formats, Revocation, Let's Encrypt & HSTS «](/blog/tls-mastery-part-6-formats-revocation-letsencrypt-hsts) · Next: Part 8 — mTLS, Client Certs & cert-manager »*
+*Previous: [Part 6 — Formats, Revocation, Let's Encrypt & HSTS «](/blog/tls-mastery-part-6-formats-revocation-letsencrypt-hsts) · Next: Part 8 — End-to-End TLS: F5 → Ingress → Backend »*

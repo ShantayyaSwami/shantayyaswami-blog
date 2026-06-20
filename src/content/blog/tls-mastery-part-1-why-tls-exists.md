@@ -171,8 +171,7 @@ In **Part 2** we'll use these ideas to explain **HTTPS, certificates, Certificat
 | Part 4 | OpenSSL: Self-Signed Cert + NGINX |
 | Part 5 | Build Your Own CA: Root → Intermediate → Leaf, CSR & SAN |
 | Part 6 | Formats, Revocation, Let's Encrypt & HSTS |
-| Part 7 | Kubernetes Ingress TLS (SSL Offloading) |
-| Part 8 | mTLS, Client Certs & cert-manager |
-| Part 9 | End-to-End: Load Balancer → Ingress → Backend |
+| Part 7 | Kubernetes Ingress TLS (SSL Offloading), mTLS, Client Certs & cert-manager |
+| Part 8 | End-to-End: Load Balancer → Ingress → Backend |
 | Part 10 | Designing TLS Across Environments |
 | Part 11 | Common Certificate Errors |
