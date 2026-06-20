@@ -198,11 +198,12 @@ Refresh over HTTPS. Because the cert is **self-signed**, the browser still warns
 ```mermaid
 sequenceDiagram
     participant U as Browser
-    participant T as Traefik Ingress (TLS terminates here)
-    participant S as Backend Service / Pod
+    participant T as Traefik Ingress - TLS terminates here
+    participant S as Backend Service or Pod
 
     U->>T: HTTPS request to mynginx.com
-    Note over T: Presents cert from my-tls-secret,<br/>completes handshake, decrypts
+    Note over T: Presents cert from my-tls-secret
+    Note over T: completes handshake, decrypts
     T->>S: Plain HTTP (internal network)
     S->>T: Plain HTTP response
     T->>U: HTTPS response (re-encrypted)
