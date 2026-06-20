@@ -151,4 +151,4 @@ You now know the production-facing essentials: **formats** and conversions, **re
 
 In **Part 7** we move to **Kubernetes**: what Ingress is and how to terminate TLS at the Ingress controller (SSL offloading) with a TLS Secret.
 
-*Previous: [Part 5 — Build Your Own CA: Root → Intermediate → Leaf «](/blog/tls-mastery-part-5-build-ca-csr-san) · Next: Part 7 — TLS for Kubernetes Ingress »*
+*Previous: [Part 5 — Build Your Own CA: Root → Intermediate → Leaf «](/blog/tls-mastery-part-5-build-ca-csr-san) · Next: [Part 7 — TLS for Kubernetes Ingress »](/blog/tls-mastery-part-7-kubernetes-ingress-tls)*
