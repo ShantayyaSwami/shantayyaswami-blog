@@ -149,7 +149,7 @@ openssl req -new -nodes -key domain.key -out domain.csr
 openssl x509 -req -in domain.csr -signkey domain.key -out domain.crt -days 365
 ```
 
-> Use `domain.*` / `server.*` names for **server** certificates — not `user.*` (those are *client* certificates, covered in Part 8).
+> Use `domain.*` / `server.*` names for **server** certificates — not `user.*` (those are *client* certificates, covered in Part 7).
 
 ---
 

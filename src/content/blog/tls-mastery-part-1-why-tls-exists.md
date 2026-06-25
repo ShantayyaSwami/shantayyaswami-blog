@@ -9,7 +9,7 @@ author: "Shantayya Swami"
 image: "/images/TLS Mastery — Part 1.png"
 ---
 
-This is the opening post of an 11-part **TLS Mastery** series. By the end you'll understand how HTTPS really works, how to create certificates and your own CA with OpenSSL, what the real-world bits (Let's Encrypt, revocation, formats) are, and how to secure traffic in Kubernetes.
+This is the opening post of an 8-part **TLS Mastery** series. By the end you'll understand how HTTPS really works, how to create certificates and your own CA with OpenSSL, what the real-world bits (Let's Encrypt, revocation, formats) are, and how to secure traffic in Kubernetes.
 
 In this part:
 
@@ -172,6 +172,4 @@ In **Part 2** we'll use these ideas to explain **HTTPS, certificates, Certificat
 | Part 5 | Build Your Own CA: Root → Intermediate → Leaf, CSR & SAN |
 | Part 6 | Formats, Revocation, Let's Encrypt & HSTS |
 | Part 7 | Kubernetes Ingress TLS (SSL Offloading), mTLS, Client Certs & cert-manager |
-| Part 8 | End-to-End: Load Balancer → Ingress → Backend |
-| Part 10 | Designing TLS Across Environments |
-| Part 11 | Common Certificate Errors |
+| [Part 8](/blog/tls-mastery-part-8-certificate-errors) | Common Certificate Errors & How to Fix Them |

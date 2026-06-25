@@ -407,6 +407,6 @@ cert-manager notices the annotation, obtains a real Let's Encrypt certificate fo
 - **mTLS** authenticates both sides simultaneously; Kubernetes uses it for API server access, service meshes extend it to every pod.
 - **cert-manager** automates the full lifecycle — issuance, storage, and renewal — so you never manage a Secret by hand.
 
-In **Part 8** we put all of this into a real production topology: **F5 → Ingress → backend service**, showing which certificate carries which SAN, what is validated at each hop, and exactly what `proxy-ssl-verify: "on"` checks.
+In **Part 8** (the final part) we turn this into a practical troubleshooting reference — the certificate errors you'll actually encounter in production, what each means, and how to fix them fast.
 
-*Previous: [Part 6 — Formats, Revocation, Let's Encrypt & HSTS «](/blog/tls-mastery-part-6-formats-revocation-letsencrypt-hsts) · Next: Part 8 — End-to-End TLS: F5 → Ingress → Backend »*
+*Previous: [Part 6 — Formats, Revocation, Let's Encrypt & HSTS «](/blog/tls-mastery-part-6-formats-revocation-letsencrypt-hsts) · Next: [Part 8 — Common Certificate Errors »](/blog/tls-mastery-part-8-certificate-errors)*

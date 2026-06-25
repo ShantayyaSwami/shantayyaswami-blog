@@ -122,7 +122,7 @@ extendedKeyUsage = serverAuth
 subjectAltName   = DNS:app.dev.com, DNS:www.app.dev.com
 ```
 
-> SAN is **not** a wildcard. A wildcard (`*.example.com`) matches subdomains by pattern; SAN is an explicit list of specific names/IPs. (We dig into wildcard depth and SAN strategy across environments in Part 10.)
+> SAN is **not** a wildcard. A wildcard (`*.example.com`) matches subdomains by pattern; SAN is an explicit list of specific names/IPs.
 
 ---
 
@@ -212,7 +212,7 @@ Browse to `https://app.dev.com`. You'll **still** see "Not secure" — the certi
 
 Refresh — **padlock**, "Connection is secure", issued to `app.dev.com`, signed by your CA.
 
-> In organisations, IT distributes the internal root to every managed device automatically, so internal HTTPS "just works" for employees. (We automate all of this with cert-manager in Part 8 and design it across environments in Part 10.)
+> In organisations, IT distributes the internal root to every managed device automatically, so internal HTTPS "just works" for employees. (We automate all of this with cert-manager in Part 7.)
 
 ---
 

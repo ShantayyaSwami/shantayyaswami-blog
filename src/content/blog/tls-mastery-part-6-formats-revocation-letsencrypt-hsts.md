@@ -125,7 +125,7 @@ sudo certbot --nginx -d example.com -d www.example.com
 # certbot edits nginx config and sets up auto-renewal via a timer/cron
 ```
 
-> In Kubernetes, the equivalent is **cert-manager**, which speaks ACME and issues/renews certificates automatically — we'll use it in Part 8.
+> In Kubernetes, the equivalent is **cert-manager**, which speaks ACME and issues/renews certificates automatically — covered in Part 7.
 
 ---
 
