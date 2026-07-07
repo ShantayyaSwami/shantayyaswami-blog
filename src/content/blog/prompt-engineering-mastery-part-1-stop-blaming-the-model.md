@@ -1,5 +1,5 @@
 ---
-title: "Prompt Engineering Mastery — Part 1: Why Prompting Is a DevOps Skill"
+title: "Prompt Engineering Mastery — Part 1: Stop Blaming the Model, Start Engineering the Ask"
 date: 2026-07-06
 tags: ["AI", "Prompt Engineering", "DevOps", "Productivity"]
 excerpt: "For a long time I used AI like a search box and blamed the model for weak answers. It was never the model. Part 1 of a hands-on series on prompting — starting with what a prompt really is and the anatomy of one that works."
