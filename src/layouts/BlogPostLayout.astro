@@ -65,3 +65,61 @@ const formattedDate = date.toLocaleDateString('en-US', {
     </div>
   </div>
 </BaseLayout>
+
+<style is:global>
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    margin: 2rem 0;
+    padding: 1rem;
+    background: #1c1c1c;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.75rem;
+  }
+  .mermaid svg {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+
+<script type="module" is:inline>
+  // Astro/Shiki renders ```mermaid fences as <pre data-language="mermaid"><code>...</code></pre>
+  // (NOT <code class="language-mermaid"> — that selector was the bug in the earlier attempt,
+  // which silently matched nothing and left raw highlighted syntax on screen).
+  const blocks = document.querySelectorAll('pre[data-language="mermaid"]');
+
+  if (blocks.length) {
+    try {
+      const { default: mermaid } = await import(
+        'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs'
+      );
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'dark',
+        themeVariables: {
+          fontFamily: '"JetBrains Mono", monospace',
+        },
+      });
+
+      const nodes = [];
+      blocks.forEach(pre => {
+        const code = pre.querySelector('code');
+        const div = document.createElement('div');
+        div.className = 'mermaid';
+        div.textContent = code?.textContent ?? '';
+        pre.replaceWith(div);
+        nodes.push(div);
+      });
+
+      // suppressErrors: a bad diagram renders as an inline error instead of
+      // aborting the whole batch (and never touches the rest of the page).
+      await mermaid.run({ nodes, suppressErrors: true });
+    } catch (err) {
+      // CDN unreachable, parse failure, etc. — the original Shiki code block
+      // is already gone, but the rest of the page is untouched either way.
+      console.error('Mermaid rendering failed:', err);
+    }
+  }
+</script>
