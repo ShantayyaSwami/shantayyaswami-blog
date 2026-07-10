@@ -156,13 +156,12 @@ You won't use every field every time — and you shouldn't. For a quick lookup (
 
 ## What's next
 
-The skeleton above is the *how* — how to phrase any serious prompt. The other half is the *which*: knowing that there isn't one kind of prompt but roughly a dozen, and that reaching for the right one is most of the skill.
+The skeleton above is the *how* — how to phrase any serious prompt. **Part 2** is the *which* and the *what*: the twelve prompt types — zero-shot, few-shot, persona, chaining, negative, reference-text & more — and then the copy-paste playbook, the exact prompts I use for AWS learning, pipeline troubleshooting, and script writing.
 
 | Part | Topic |
 |:--|:--|
 | **Part 1 — You are here** | Why Prompting Is a DevOps Skill |
-| Part 2 | The 12 prompt types — zero-shot, few-shot, persona, chaining, negative, reference-text & more, with a one-glance map |
-| Part 3 | The copy-paste playbook — exact prompts for AWS learning, pipeline troubleshooting, script writing, and prompting AI to improve your own prompts |
+| [Part 2](/blog/prompt-engineering-mastery-part-2-the-12-prompt-types) | The 12 prompt types, when to use each, and the copy-paste prompt playbook |
 
 If you take one thing from Part 1, take this:
 

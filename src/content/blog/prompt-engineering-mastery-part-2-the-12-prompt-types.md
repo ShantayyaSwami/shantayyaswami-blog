@@ -1,19 +1,19 @@
 ---
-title: "Prompt Engineering Mastery — Part 2: The 12 Prompt Types and When to Use Each"
+title: "Prompt Engineering Mastery — Part 2: The 12 Prompt Types and the Copy-Paste Playbook"
 date: 2026-07-10
 tags: ["AI", "Prompt Engineering", "DevOps", "Productivity"]
-excerpt: "There isn't one kind of prompt — there are about a dozen, and picking the right one is most of the skill. A DevOps-first tour of the twelve prompt types, with a simple rule for choosing in the moment."
-readTime: "9 min read"
+excerpt: "There isn't one kind of prompt — there are about a dozen, and picking the right one is most of the skill. The twelve prompt types, when to reach for each, and the exact copy-paste prompts I use for AWS learning, pipeline troubleshooting, and script writing."
+readTime: "12 min read"
 featured: true
 author: "Shantayya Swami"
 image: "/images/Prompt Engineering Mastery — Part 2.png"
 ---
 
-In [Part 1](/blog/prompt-engineering-mastery-part-1-stop-blaming-the-model) I made the case that prompting is a real skill and shared the skeleton I use for any serious prompt. That skeleton is the *how*. This part is the *which*.
+In [Part 1](/blog/prompt-engineering-mastery-part-1-stop-blaming-the-model) I made the case that prompting is a real skill and shared the skeleton I use for any serious prompt. That skeleton is the *how*. This part is the *which* and the *what* — the twelve prompt types, when to reach for each, and then the exact prompts I keep on hand so you can skip the trial and error.
 
 Because here's the thing that took me embarrassingly long to internalise: there isn't one kind of prompt. There are roughly a dozen, each suited to a different situation, and most of the skill is reaching for the right one without thinking about it — the same way you don't consciously decide between `grep` and `awk`, you just know.
 
-Let me walk through them in four natural families, because they group more cleanly than a flat list of twelve.
+Let me walk through them in four natural families, because they group more cleanly than a flat list of twelve. Then, once the types make sense, I'll hand over the playbook — the actual prompts, ready to paste and fill in.
 
 ---
 
@@ -85,8 +85,191 @@ And underneath all of them sits the golden rule from Part 1: **clear goal + cont
 
 ---
 
-## What's next
+## The copy-paste prompt playbook
 
-Knowing the twelve types is the theory. In **Part 3** I'll hand over the practice — the actual copy-paste prompts I keep on hand for AWS learning, pipeline troubleshooting, YouTube script writing, and the meta-move of asking AI to improve my own prompts — plus a ten-point pre-send checklist and one master prompt you can reuse for almost anything.
+Knowing the twelve types is the theory. Here's the practice — the prompts I actually keep on hand, ready to paste and fill in.
 
-That's the part you'll bookmark. See you there.
+None of these are clever. They're just the Part 1 skeleton wearing different clothes for different jobs — which is exactly the point. Once the structure is muscle memory, you stop writing prompts from scratch and start filling in slots.
+
+### A. For serious technical learning
+
+When I want to genuinely master a topic — not skim it — I use this. The persona sets the altitude, the context tells the model what I already know so it doesn't waste time on basics, and the numbered tasks force real depth instead of a Wikipedia summary.
+
+```text
+Act as a senior AWS Solutions Architect and DevOps mentor.
+
+Goal:
+Help me master AWS VPC deeply, to Solutions Architect Professional level.
+
+Context:
+I'm a Principal DevOps engineer with Jenkins, Kubernetes, Terraform,
+AWS, Azure DevOps, ArgoCD, and Datadog experience.
+
+Task:
+1. Explain VPC from basics to advanced.
+2. Show how subnets, route tables, NAT Gateway, IGW, NACL, SG,
+   VPC endpoints, Transit Gateway, and PrivateLink connect.
+3. Give a real enterprise architecture example.
+4. Give interview questions.
+5. Give a hands-on Terraform assignment.
+
+Output format:
+Sections, text diagrams, and practical examples.
+```
+
+Swap "VPC" for whatever you're studying. The shape holds for EKS internals, IAM, observability, anything.
+
+### B. For troubleshooting pipeline failures
+
+This is the one I reach for most. It does something subtle: it forces the model to *classify* the failure before fixing it, which stops it from confidently proposing a DevOps fix for what's actually a developer bug. Note the delimited input — the logs go inside the quotes so the model treats them as evidence, not instructions.
+
+```text
+Act as an enterprise DevOps incident investigator.
+
+Context:
+Our pipeline flow is GitHub/Bitbucket -> Jenkins/Azure DevOps ->
+SonarQube -> Nexus -> Terraform -> AWS -> Kubernetes -> ArgoCD ->
+Datadog -> Slack/Jira.
+
+Issue:
+"""
+[paste error logs here]
+"""
+
+Task:
+1. Identify the most likely root cause.
+2. Classify it: DevOps, developer, infra, security, or dependency issue.
+3. Give a quick fix.
+4. Give a permanent fix.
+5. Suggest how an AI DevOps agent could detect this next time.
+
+Output format:
+Table with columns: Root Cause, Evidence, Fix, Owner, Prevention.
+```
+
+The "how would an AI agent catch this" step is optional, but I keep it in — it quietly builds a backlog of automation ideas every time something breaks.
+
+### C. For content and script writing
+
+Prompting isn't only a work tool. This is the template behind high-retention video scripts — cinematic without being cheesy, and explicitly fenced against the two things AI loves to do wrong here: invent private emotions and make unsupported claims.
+
+```text
+Act as a documentary scriptwriter for high-retention YouTube videos.
+
+Goal:
+Create a 10-minute value-based script on [topic / person].
+
+Audience:
+English-speaking viewers interested in transformation, discipline,
+career growth, and life lessons.
+
+Tone:
+Cinematic, emotional, research-backed. Not cheesy, not motivational
+shouting.
+
+Task:
+1. Start with a strong hook.
+2. Build the story in scenes.
+3. Avoid fabricated private emotions or unsupported claims.
+4. Include a practical lesson for students, engineers, and creators.
+5. End with an emotional closing.
+
+Output format:
+Clean, TTS-ready script with pauses and scene headings.
+```
+
+### D. The meta-move: ask AI to improve your prompt
+
+This is the one that made me better fastest. When you're not sure how to ask, don't guess — hand your rough prompt to the model and ask it to engineer a better one. You learn the patterns by watching what it changes.
+
+```text
+Review my prompt below and improve it using prompt engineering
+best practices.
+
+My goal:
+[what I want]
+
+Current prompt:
+"""
+[paste prompt]
+"""
+
+Improve it for:
+1. clarity
+2. output quality
+3. reduced hallucination
+4. better structure
+5. better visual or technical detail
+
+Give me:
+- the improved prompt
+- why it's better
+- an optional advanced version
+```
+
+Use this whenever you catch yourself unsure how to phrase something. Over time you'll need it less, because you'll have absorbed the moves.
+
+## Your ten-point pre-send checklist
+
+Before you send anything that matters, run down this list. It sounds tedious; it takes ten seconds once it's a habit, and it fixes the vast majority of weak prompts:
+
+1. Did I define the role?
+2. Did I explain the goal?
+3. Did I give enough context?
+4. Did I paste the input clearly inside quotes or tags?
+5. Did I specify the output format?
+6. Did I say what to avoid?
+7. Did I provide examples where they'd help?
+8. Did I ask for practical steps, not just theory?
+9. Did I ask for a verification or quality check?
+10. Did I mention audience, tone, and length?
+
+Most bad answers I get trace back to skipping three or four of these.
+
+## The master prompt to rule them all
+
+If you only save one thing from this entire series, save this. It's the general-purpose template — the skeleton from Part 1, tuned to force the model to think about gaps and assumptions before answering, and to close with something you can act on:
+
+```text
+Act as an expert in [domain].
+
+I want to achieve:
+[goal]
+
+My context:
+[background, skill level, audience, business/career/content situation]
+
+Here is my input:
+"""
+[paste content / code / script / problem / data]
+"""
+
+Please do the following:
+1. Understand the goal.
+2. Identify missing information or assumptions.
+3. Give the best possible answer.
+4. Make it practical and directly usable.
+5. Include examples.
+6. Mention risks, mistakes, or limitations.
+7. Give a final checklist or next steps.
+
+Output format:
+[table / roadmap / bullets / script / YAML / Terraform / prompt / checklist]
+
+Tone:
+Clear, practical, mentor-like. No unnecessary jargon.
+
+Avoid:
+Generic advice, unsupported claims, hallucination, and
+over-complicated explanations.
+```
+
+This single structure carries me across DevOps questions, AWS study, AI video work, YouTube scripts, trading notes, blog drafts, and product architecture. Different domain, same skeleton.
+
+## Where this leaves us
+
+Two parts, and it really does reduce to one idea: **stop treating AI like a search box and start engineering the ask.** A prompt is a blueprint. Pick the right type for the job. Give the model less to guess about. Run the checklist. Reuse the master prompt.
+
+The tools will keep changing — new models, new features, new names every few months. This skill won't go stale, because it's not about any one tool. It's about thinking clearly enough to say exactly what you want. That's a good habit to build regardless of what the AI on the other end happens to be.
+
+That's the series. If you build your own template library out of these, you'll feel the difference within a week — I did.
